@@ -3,47 +3,40 @@ using UnityEngine;
 
 public class TowerHandler : MonoBehaviour
 {
-    [SerializeField] List<Transform> noodleSegments;
-
-    [Header("// SIMPLE")]
-    [SerializeField] float followSpeed = 10f;
-    [SerializeField] float segmentHeight = 1f;
-    [SerializeField] float wobbleSpeed = 5f;
-    [SerializeField] float wobbleAmount = 0.025f;
-
-    [Header("// WITH ROTATION")]
-    [SerializeField] float segmentSpacing = 1f;
-    [SerializeField] float rotationSpeed = 1f;
-    [SerializeField] float waveOffset = 1f;
-
-    [Header("// WITH INERTIA")]
-    [SerializeField] float followSmoothness = 10f;
-    [SerializeField] float inertia = 0.9f;
-    [SerializeField] float rotationSmoothness = 5f;
+    [SerializeField] Transform _root = null;
+    [SerializeField] float _segmentSpacing = 1f;
+    [SerializeField] float _followSmoothness = 15f;
+    [SerializeField] float _inertia = 15f;
+    [SerializeField] float _rotationSmoothness = 1f;
 
     [Header("// GENERATOR")]
     [SerializeField] List<Transform> _prefabs = null;
     [SerializeField] int _initialCount = 10;
 
-    private readonly List<NoodleSegmentData> noodleData = new();
+    [Header("// READONLY")]
+    [SerializeField] List<Transform> _segments;
+
+    private readonly List<NoodleSegmentData> _dataList = new();
 
     private void Start()
     {
+        _segments.Add(_root);
+
         for (int i = 0; i < _initialCount; i++)
         {
             var _prefab = _prefabs[Random.Range(0, _prefabs.Count)];
             var _instance = Instantiate(_prefab);
-            noodleSegments.Add(_instance);
+            _segments.Add(_instance);
         }
 
-        int _count = noodleSegments.Count;
+        int _count = _segments.Count;
 
         for (int i = 0; i < _count; i++)
         {
-            noodleData.Add(new NoodleSegmentData
+            _dataList.Add(new NoodleSegmentData
             {
-                position = noodleSegments[i].position,
-                rotation = noodleSegments[i].rotation,
+                position = _segments[i].position,
+                rotation = _segments[i].rotation,
                 velocity = Vector3.zero
             });
         }
@@ -51,93 +44,40 @@ public class TowerHandler : MonoBehaviour
 
     private void LateUpdate()
     {
-        //Simple();
-        //WithRotation();
-        WithInertia();
+        MoveSegments();
     }
 
-    private void Simple()
+    private void MoveSegments()
     {
-        for (int i = 1; i < noodleSegments.Count; i++)
+        for (int i = 0; i < _segments.Count; i++)
         {
-            var segment = noodleSegments[i];
-
-            Vector3 targetPos = noodleSegments[i - 1].position + Vector3.up * segmentHeight;
-            segment.position = Vector3.Lerp(noodleSegments[i].position, targetPos, Time.deltaTime * followSpeed);
-
-            Vector3 sideOffset = Mathf.Sin(Time.time * wobbleSpeed) * wobbleAmount * transform.right;
-            segment.position += sideOffset;
-        }
-    }
-
-    private void WithRotation()
-    {
-        for (int i = 1; i < noodleSegments.Count; i++)
-        {
-            Transform prev = noodleSegments[i - 1];
-            Transform current = noodleSegments[i];
-
-            // Position follow
-            Vector3 targetPos = prev.position + Vector3.up * segmentSpacing;
-            current.position = Vector3.Lerp(current.position, targetPos, Time.deltaTime * followSpeed);
-
-            // Rotation follow
-            Vector3 direction = prev.position - current.position;
-            if (direction != Vector3.zero)
-            {
-                //float wave = Mathf.Sin(Time.time * wobbleSpeed + i * waveOffset) * wobbleAmount;
-                //current.localRotation *= Quaternion.Euler(0f, wave, 0f);
-
-                Quaternion targetRot = Quaternion.LookRotation(direction);
-                current.rotation = Quaternion.Slerp(current.rotation, targetRot, Time.deltaTime * rotationSpeed);
-            }
-        }
-    }
-
-    private void WithInertia()
-    {
-        for (int i = 0; i < noodleSegments.Count; i++)
-        {
-            var segment = noodleSegments[i];
-            var data = noodleData[i];
+            var _segment = _segments[i];
+            var _data = _dataList[i];
 
             if (i == 0)
             {
-                // First segment follows player directly
-                data.position = noodleSegments[0].position;
-                data.rotation = noodleSegments[0].rotation;
+                _data.position = _segments[0].position;
+                _data.rotation = _segments[0].rotation;
             }
             else
             {
-                var prev = noodleData[i - 1];
+                var _previousData = _dataList[i - 1];
 
-                // Target position based on previous
-                Vector3 targetPos = prev.position + Vector3.up * segmentSpacing;
+                Vector3 _targetPosition = _previousData.position + Vector3.up * _segmentSpacing;
+                Vector3 _desiredVelocity = (_targetPosition - _data.position) * _followSmoothness;
+                _data.velocity = Vector3.Lerp(_data.velocity, _desiredVelocity, Time.deltaTime * _inertia);
+                _data.position += _data.velocity * Time.deltaTime;
 
-                // Inertia movement
-                Vector3 desiredVelocity = (targetPos - data.position) * followSmoothness;
-                data.velocity = Vector3.Lerp(data.velocity, desiredVelocity, Time.deltaTime * inertia);
+                Vector3 _direction = _previousData.position - _data.position;
 
-                // Apply movement
-                data.position += data.velocity * Time.deltaTime;
-
-                // Smooth rotation toward previous
-                Vector3 direction = prev.position - data.position;
-                if (direction.sqrMagnitude > 0.001f)
+                if (_direction.sqrMagnitude > 0.001f)
                 {
-                    Quaternion targetRot = Quaternion.LookRotation(direction);
-                    data.rotation = Quaternion.Slerp(data.rotation, targetRot, Time.deltaTime * rotationSmoothness);
+                    Quaternion targetRot = Quaternion.LookRotation(_direction);
+                    _data.rotation = Quaternion.Slerp(_data.rotation, targetRot, Time.deltaTime * _rotationSmoothness);
                 }
             }
 
-            //float wave = Mathf.Sin(Time.time * wobbleSpeed + i * waveOffset) * wobbleAmount;
-            //segment.localRotation *= Quaternion.Euler(0f, wave, 0f);
-
-            // Apply to segment
-            segment.SetPositionAndRotation(data.position, data.rotation);
-
-            //float wave = Mathf.Sin(Time.time * wobbleSpeed + i * waveOffset) * wobbleAmount;
-            //segment.localRotation *= Quaternion.Euler(0f, wave, 0f);
+            _segment.SetPositionAndRotation(_data.position, _data.rotation);
         }
     }
 }
