@@ -707,8 +707,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.09853762, y: 0, z: 0, w: 0.99513334}
-  m_LocalPosition: {x: 0, y: 10, z: -15}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: 0, y: 10, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1110,14 +1110,13 @@ GameObject:
   - component: {fileID: 606080580}
   - component: {fileID: 606080581}
   - component: {fileID: 606080582}
-  - component: {fileID: 606080583}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &606080578
 Transform:
   m_ObjectHideFlags: 0
@@ -1132,7 +1131,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1358087642}
-  - {fileID: 1152699379}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &606080579
@@ -1207,35 +1205,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rotationSpeed: 20
   _cc: {fileID: 606080579}
---- !u!114 &606080583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 606080577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d84cc4c44ddb72b4890b0dc13fc4a749, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  noodleSegments:
-  - {fileID: 1152699379}
-  followSpeed: 10
-  segmentHeight: 1.5
-  wobbleSpeed: 1
-  wobbleAmount: 1
-  segmentSpacing: 1
-  rotationSpeed: 10
-  waveOffset: 1
-  followSmoothness: 15
-  inertia: 15
-  rotationSmoothness: 1
-  _prefabs:
-  - {fileID: 3084366758591864986, guid: 5028f8038df80904bb74b0e450393a97, type: 3}
-  - {fileID: 8041876489105404745, guid: d232635a196634043ac7d9aac8f46442, type: 3}
-  - {fileID: 4200679149088958272, guid: 2eb74dc119473bd4da53f17230cd92aa, type: 3}
-  _initialCount: 15
 --- !u!1001 &658787012
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2016,13 +1985,40 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1152699379}
+  - component: {fileID: 1152699378}
   m_Layer: 0
-  m_Name: TowerRoot
+  m_Name: NoodleTower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1152699378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1152699377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d84cc4c44ddb72b4890b0dc13fc4a749, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noodleSegments:
+  - {fileID: 1152699379}
+  followSpeed: 20
+  segmentHeight: 1.5
+  wobbleSpeed: 5
+  wobbleAmount: 0.025
+  segmentSpacing: 1
+  rotationSpeed: 10
+  waveOffset: 1
+  _prefabs:
+  - {fileID: 3084366758591864986, guid: 5028f8038df80904bb74b0e450393a97, type: 3}
+  - {fileID: 8041876489105404745, guid: d232635a196634043ac7d9aac8f46442, type: 3}
+  - {fileID: 4200679149088958272, guid: 2eb74dc119473bd4da53f17230cd92aa, type: 3}
+  _initialCount: 10
 --- !u!4 &1152699379
 Transform:
   m_ObjectHideFlags: 0
@@ -2031,12 +2027,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1152699377}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 606080578}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1157946757
 GameObject:
@@ -2241,7 +2237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e8b78ac948f05a46a6d8339a503172b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LookAtOffset: {x: 0, y: 7, z: 0}
+  LookAtOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &1283471361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2260,7 +2256,7 @@ MonoBehaviour:
     AngularDampingMode: 0
     RotationDamping: {x: 1, y: 1, z: 1}
     QuaternionDamping: 1
-  FollowOffset: {x: 0, y: 10, z: -15}
+  FollowOffset: {x: 0, y: 10, z: -10}
 --- !u!114 &1283471362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2281,7 +2277,7 @@ MonoBehaviour:
   m_StreamingVersion: 20241001
   m_LegacyPriority: 0
   Target:
-    TrackingTarget: {fileID: 606080578}
+    TrackingTarget: {fileID: 1152699379}
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
@@ -2312,8 +2308,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1283471359}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.09853762, y: 0, z: 0, w: 0.99513334}
-  m_LocalPosition: {x: 0, y: 10, z: -15}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: 0, y: 10, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3357,3 +3353,4 @@ SceneRoots:
   - {fileID: 888304882}
   - {fileID: 702406101}
   - {fileID: 606080578}
+  - {fileID: 1152699379}
