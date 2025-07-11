@@ -1228,7 +1228,7 @@ MonoBehaviour:
   - {fileID: 3084366758591864986, guid: 5028f8038df80904bb74b0e450393a97, type: 3}
   - {fileID: 8041876489105404745, guid: d232635a196634043ac7d9aac8f46442, type: 3}
   - {fileID: 4200679149088958272, guid: 2eb74dc119473bd4da53f17230cd92aa, type: 3}
-  _initialCount: 15
+  _initialCount: 5
   _segments: []
 --- !u!1001 &658787012
 PrefabInstance:

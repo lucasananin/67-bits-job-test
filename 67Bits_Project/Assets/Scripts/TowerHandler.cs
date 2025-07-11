@@ -3,7 +3,11 @@ using UnityEngine;
 
 public class TowerHandler : MonoBehaviour
 {
+    [Header("// GENERAL")]
     [SerializeField] Transform _root = null;
+    [SerializeField] int _capacity = 10;
+
+    [Header("// MOVEMENT")]
     [SerializeField] float _segmentSpacing = 1f;
     [SerializeField] float _followSmoothness = 15f;
     [SerializeField] float _inertia = 15f;
@@ -14,31 +18,17 @@ public class TowerHandler : MonoBehaviour
     [SerializeField] int _initialCount = 10;
 
     [Header("// READONLY")]
-    [SerializeField] List<Transform> _segments;
-
-    private readonly List<NoodleSegmentData> _dataList = new();
+    [SerializeField] List<Transform> _segments = null;
+    [SerializeField] List<NoodleSegmentData> _dataList = null;
 
     private void Start()
     {
         _segments.Add(_root);
+        AddData(_root);
 
         for (int i = 0; i < _initialCount; i++)
         {
-            var _prefab = _prefabs[Random.Range(0, _prefabs.Count)];
-            var _instance = Instantiate(_prefab);
-            _segments.Add(_instance);
-        }
-
-        int _count = _segments.Count;
-
-        for (int i = 0; i < _count; i++)
-        {
-            _dataList.Add(new NoodleSegmentData
-            {
-                position = _segments[i].position,
-                rotation = _segments[i].rotation,
-                velocity = Vector3.zero
-            });
+            AddSegment();
         }
     }
 
@@ -80,8 +70,46 @@ public class TowerHandler : MonoBehaviour
             _segment.SetPositionAndRotation(_data.position, _data.rotation);
         }
     }
+
+    [ContextMenu("AddSegment()")]
+    public void AddSegment()
+    {
+        if (_segments.Count >= _capacity + 1) return;
+
+        var _prefab = _prefabs[Random.Range(0, _prefabs.Count)];
+        var _instance = Instantiate(_prefab);
+        _segments.Add(_instance);
+        AddData(_instance);
+    }
+
+    [ContextMenu("RemoveSegment()")]
+    public void RemoveSegment()
+    {
+        if (_segments.Count <= 1) return;
+
+        var _instance = _segments[^1];
+        _segments.Remove(_instance);
+        Destroy(_instance.gameObject);
+        RemoveData();
+    }
+
+    private void AddData(Transform _transform)
+    {
+        _dataList.Add(new NoodleSegmentData
+        {
+            position = _transform.position,
+            rotation = _transform.rotation,
+            velocity = Vector3.zero
+        });
+    }
+
+    private void RemoveData()
+    {
+        _dataList.RemoveAt(_dataList.Count - 1);
+    }
 }
 
+[System.Serializable]
 public class NoodleSegmentData
 {
     public Vector3 position;
