@@ -7,5 +7,5 @@ public class PlayerInput : MonoBehaviour
     [SerializeField] InputActionReference _jump = null;
 
     public Vector2 Move { get => _move.action.ReadValue<Vector2>(); }
-    public bool Jump { get => _jump.action.WasPerformedThisFrame(); }
+    //public bool Jump { get => _jump.action.WasPerformedThisFrame(); }
 }
