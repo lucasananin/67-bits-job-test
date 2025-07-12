@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 public class TowerHandler : MonoBehaviour
@@ -15,6 +16,7 @@ public class TowerHandler : MonoBehaviour
 
     [Header("// GENERATOR")]
     [SerializeField] List<Transform> _prefabs = null;
+    [SerializeField] AIEntity _aiPrefab = null;
     [SerializeField] int _initialCount = 10;
 
     [Header("// READONLY")]
@@ -28,7 +30,8 @@ public class TowerHandler : MonoBehaviour
 
         for (int i = 0; i < _initialCount; i++)
         {
-            AddSegment();
+            //AddSegment();
+            AddSegmentRB();
         }
     }
 
@@ -70,6 +73,27 @@ public class TowerHandler : MonoBehaviour
             _segment.SetPositionAndRotation(_data.position, _data.rotation);
         }
     }
+
+    [ContextMenu(nameof(AddSegmentRB))]
+    public void AddSegmentRB()
+    {
+        if (_segments.Count >= _capacity + 1) return;
+        var _instance = Instantiate(_aiPrefab, Vector3.up * _segments.Count, Quaternion.identity);
+        _instance.GoToTower();
+        var _handle = _instance.HandleRB.transform;
+        _segments.Add(_handle);
+        AddData(_handle);
+    }
+
+    //[ContextMenu(nameof(RemoveSegmentRB))]
+    //public void RemoveSegmentRB()
+    //{
+    //    if (_segments.Count <= 1) return;
+    //    var _instance = _segments[^1];
+    //    _segments.Remove(_instance);
+    //    _rb.isKinematic = false;
+    //    RemoveData();
+    //}
 
     [ContextMenu("AddSegment()")]
     public void AddSegment()
