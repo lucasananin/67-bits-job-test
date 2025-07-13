@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TowerHandler : MonoBehaviour
 {
@@ -22,6 +24,8 @@ public class TowerHandler : MonoBehaviour
     [SerializeField] List<Transform> _segments = null;
     [SerializeField] List<NoodleSegmentData> _dataList = null;
 
+    public static event UnityAction<TowerHandler> OnChanged = null;
+
     private void Start()
     {
         _segments.Add(_root);
@@ -32,6 +36,8 @@ public class TowerHandler : MonoBehaviour
         //    //AddSegment();
         //    AddSegmentRB();
         //}
+
+        OnChanged?.Invoke(this);
     }
 
     private void LateUpdate()
@@ -78,6 +84,7 @@ public class TowerHandler : MonoBehaviour
         if (_segments.Count >= _capacity + 1) return;
         _segments.Add(_transform);
         AddData(_transform);
+        OnChanged?.Invoke(this);
     }
 
     //[ContextMenu("AddSegment()")]
@@ -117,6 +124,7 @@ public class TowerHandler : MonoBehaviour
             RemoveData();
         }
 
+        OnChanged?.Invoke(this);
         return _list;
     }
 
@@ -133,6 +141,11 @@ public class TowerHandler : MonoBehaviour
     private void RemoveData()
     {
         _dataList.RemoveAt(_dataList.Count - 1);
+    }
+
+    internal string GetDisplayString()
+    {
+        return $"{_segments.Count - 1}/{_capacity}";
     }
 }
 
