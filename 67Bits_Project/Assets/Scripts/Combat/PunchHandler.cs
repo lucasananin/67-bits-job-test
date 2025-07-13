@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PunchHandler : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class PunchHandler : MonoBehaviour
     [SerializeField] float _upwardsMultiplier = 1f;
 
     private readonly RaycastHit[] _results = new RaycastHit[9];
+
+    public event UnityAction OnPunch = null;
 
     private void FixedUpdate()
     {
@@ -23,6 +26,11 @@ public class PunchHandler : MonoBehaviour
             {
                 _entity.Knockdown(_muzzle.position, _force, _radius, _upwardsMultiplier);
             }
+        }
+
+        if (_hits > 0)
+        {
+            OnPunch?.Invoke();
         }
     }
 }

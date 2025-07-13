@@ -1433,6 +1433,7 @@ GameObject:
   m_Component:
   - component: {fileID: 606080578}
   - component: {fileID: 606080579}
+  - component: {fileID: 606080586}
   - component: {fileID: 606080580}
   - component: {fileID: 606080581}
   - component: {fileID: 606080582}
@@ -1522,6 +1523,7 @@ MonoBehaviour:
   _gravityValue: -9.81
   _playerVelocity: {x: 0, y: 0, z: 0}
   _isGrounded: 0
+  _canMove: 1
 --- !u!114 &606080582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1596,6 +1598,22 @@ MonoBehaviour:
   _force: 50
   _radius: 2
   _upwardsMultiplier: 1
+--- !u!114 &606080586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606080577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54ed122a81a1597439d98ba7e78bc2dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mover: {fileID: 606080581}
+  _anim: {fileID: 606080584}
+  _punchHandler: {fileID: 606080585}
+  _punchDuration: 0.5
 --- !u!1001 &654034033
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3498,7 +3516,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Radius: 1
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1728316279
 PrefabInstance:

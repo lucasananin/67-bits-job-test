@@ -9,11 +9,16 @@ public class PlayerMover : AbstractMover
     [SerializeField] float _gravityValue = -9.81f;
 
     [Header("// READONLY")]
-    [SerializeField] Vector3 _playerVelocity;
-    [SerializeField] bool _isGrounded;
+    [SerializeField] Vector3 _playerVelocity = default;
+    [SerializeField] bool _isGrounded = false;
+    [SerializeField] bool _canMove = true;
+
+    public bool CanMove { get => _canMove; set => _canMove = value; }
 
     private void Update()
     {
+        if (!_canMove) return;
+
         _isGrounded = _cc.isGrounded;
 
         if (_isGrounded && _playerVelocity.y < 0)
