@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
 
 public class TowerHandler : MonoBehaviour
@@ -14,10 +13,10 @@ public class TowerHandler : MonoBehaviour
     [SerializeField] float _inertia = 15f;
     [SerializeField] float _rotationSmoothness = 1f;
 
-    [Header("// GENERATOR")]
-    [SerializeField] List<Transform> _prefabs = null;
-    [SerializeField] AIEntity _aiPrefab = null;
-    [SerializeField] int _initialCount = 10;
+    //[Header("// GENERATOR")]
+    //[SerializeField] List<Transform> _prefabs = null;
+    //[SerializeField] AIEntity _aiPrefab = null;
+    //[SerializeField] int _initialCount = 10;
 
     [Header("// READONLY")]
     [SerializeField] List<Transform> _segments = null;
@@ -113,16 +112,44 @@ public class TowerHandler : MonoBehaviour
     //    AddData(_instance);
     //}
 
-    [ContextMenu("RemoveSegment()")]
-    public void RemoveSegment()
+    public List<Transform> PopSegments()
     {
-        if (_segments.Count <= 1) return;
+        if (_segments.Count <= 1) return null;
 
-        var _instance = _segments[^1];
-        _segments.Remove(_instance);
-        Destroy(_instance.gameObject);
-        RemoveData();
+        var _list = new List<Transform>(_segments);
+        _list.RemoveAt(0);
+
+        int _count = _segments.Count;
+        for (int i = _count - 1; i >= 1; i--)
+        {
+            var _segment = _segments[^1];
+            _segments.Remove(_segment);
+            RemoveData();
+        }
+
+        return _list;
     }
+
+    //public void RemoveAllSegments()
+    //{
+    //    int _count = _segments.Count;
+
+    //    for (int i = _count - 1; i >= 0; i--)
+    //    {
+    //        RemoveSegment();
+    //    }
+    //}
+
+    //[ContextMenu("RemoveSegment()")]
+    //public void RemoveSegment()
+    //{
+    //    if (_segments.Count <= 1) return;
+
+    //    var _instance = _segments[^1];
+    //    _segments.Remove(_instance);
+    //    //Destroy(_instance.gameObject);
+    //    RemoveData();
+    //}
 
     private void AddData(Transform _transform)
     {
