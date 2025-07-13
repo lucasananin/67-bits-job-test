@@ -147,6 +147,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _handleRB: {fileID: 1964533872202515311}
+  _collider: {fileID: 8859405569440573748}
+  _anim: {fileID: 4135698173907677415}
 --- !u!114 &4135698173907677415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,6 +162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _anim: {fileID: 8702091305634509750}
+  _handleRb: {fileID: 1964533872202515311}
   _rigidbodies:
   - {fileID: 1299205379416532847}
   - {fileID: 7643214706575698381}
@@ -184,6 +187,8 @@ MonoBehaviour:
   - {fileID: 4549545195473726008}
   - {fileID: 7530102020304955420}
   - {fileID: 6341716558312955556}
+  _upwardsMultiplier: 1
+  _explosionForce: 50
 --- !u!1001 &5382514969970912026
 PrefabInstance:
   m_ObjectHideFlags: 0
