@@ -80,27 +80,6 @@ public class TowerHandler : MonoBehaviour
         AddData(_transform);
     }
 
-    //[ContextMenu(nameof(AddSegmentRB))]
-    //public void AddSegmentRB()
-    //{
-    //    if (_segments.Count >= _capacity + 1) return;
-    //    var _instance = Instantiate(_aiPrefab, Vector3.up * _segments.Count, Quaternion.identity);
-    //    _instance.GoToTower();
-    //    var _handle = _instance.HandleRB.transform;
-    //    _segments.Add(_handle);
-    //    AddData(_handle);
-    //}
-
-    //[ContextMenu(nameof(RemoveSegmentRB))]
-    //public void RemoveSegmentRB()
-    //{
-    //    if (_segments.Count <= 1) return;
-    //    var _instance = _segments[^1];
-    //    _segments.Remove(_instance);
-    //    _rb.isKinematic = false;
-    //    RemoveData();
-    //}
-
     //[ContextMenu("AddSegment()")]
     //public void AddSegment()
     //{
@@ -110,6 +89,17 @@ public class TowerHandler : MonoBehaviour
     //    var _instance = Instantiate(_prefab);
     //    _segments.Add(_instance);
     //    AddData(_instance);
+    //}
+
+    //[ContextMenu("RemoveSegment()")]
+    //public void RemoveSegment()
+    //{
+    //    if (_segments.Count <= 1) return;
+
+    //    var _instance = _segments[^1];
+    //    _segments.Remove(_instance);
+    //    //Destroy(_instance.gameObject);
+    //    RemoveData();
     //}
 
     public List<Transform> PopSegments()
@@ -129,27 +119,6 @@ public class TowerHandler : MonoBehaviour
 
         return _list;
     }
-
-    //public void RemoveAllSegments()
-    //{
-    //    int _count = _segments.Count;
-
-    //    for (int i = _count - 1; i >= 0; i--)
-    //    {
-    //        RemoveSegment();
-    //    }
-    //}
-
-    //[ContextMenu("RemoveSegment()")]
-    //public void RemoveSegment()
-    //{
-    //    if (_segments.Count <= 1) return;
-
-    //    var _instance = _segments[^1];
-    //    _segments.Remove(_instance);
-    //    //Destroy(_instance.gameObject);
-    //    RemoveData();
-    //}
 
     private void AddData(Transform _transform)
     {

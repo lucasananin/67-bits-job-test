@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DropArea : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class DropArea : MonoBehaviour
     [SerializeField] float _grabInterval = 1f;
 
     private WaitForSeconds _waitTime = null;
+
+    public static event UnityAction<AIEntity> OnDelivered = null;
 
     private void Awake()
     {
@@ -38,7 +41,10 @@ public class DropArea : MonoBehaviour
                 OnComplete(() =>
                 {
                     // add money.
-                    // return segments to pool.
+                    var _entity = _segment.GetComponentInParent<AIEntity>();
+                    _entity.Disappear();
+
+                    OnDelivered?.Invoke(_entity);
                 });
 
             yield return _waitTime;

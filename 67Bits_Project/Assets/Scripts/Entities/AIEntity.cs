@@ -34,4 +34,16 @@ public class AIEntity : MonoBehaviour
         var _tower = FindFirstObjectByType<TowerHandler>();
         _tower.AddSegment(_handleRB.transform);
     }
+
+    internal void Disappear()
+    {
+        gameObject.SetActive(false);
+    }
+
+    [SerializeField] Vector2Int _priceRange = new(3, 6);
+
+    internal int GetCostValue()
+    {
+        return Random.Range(_priceRange.x, _priceRange.y + 1);
+    }
 }

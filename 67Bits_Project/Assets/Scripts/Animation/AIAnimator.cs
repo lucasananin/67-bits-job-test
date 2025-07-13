@@ -15,20 +15,6 @@ public class AIAnimator : MonoBehaviour
 
     public float _explosionForce = 1f;
 
-    //[ContextMenu(nameof(Explode))]
-    //public void Explode()
-    //{
-    //    EnableRagdoll();
-    //    int _count = _rigidbodies.Count;
-
-    //    for (int i = 0; i < _count; i++)
-    //    {
-    //        _rigidbodies[i].AddExplosionForce(_explosionForce, transform.position + transform.forward, 2f, 1f, ForceMode.Impulse);
-    //    }
-
-    //    Invoke(nameof(DisableRagdoll), 5f);
-    //}
-
     public void Explode(Vector3 _origin, float _force, float _radius, float _upwardsMultiplier)
     {
         int _count = _rigidbodies.Count;
