@@ -149,6 +149,7 @@ MonoBehaviour:
   _handleRB: {fileID: 1964533872202515311}
   _collider: {fileID: 8859405569440573748}
   _anim: {fileID: 4135698173907677415}
+  _knockdownDuration: 2
 --- !u!114 &4135698173907677415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,7 +188,6 @@ MonoBehaviour:
   - {fileID: 4549545195473726008}
   - {fileID: 7530102020304955420}
   - {fileID: 6341716558312955556}
-  _upwardsMultiplier: 1
   _explosionForce: 50
 --- !u!1001 &5382514969970912026
 PrefabInstance:
@@ -1207,7 +1207,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.42401484, y: 0.13413233, z: 0.2937553}
+  m_Size: {x: 0.3, y: 0.13413233, z: 0.2937553}
   m_Center: {x: 0, y: 0.06706616, z: 0}
 --- !u!54 &1299205379416532847
 Rigidbody:
@@ -1410,7 +1410,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.42401484, y: 0.43737513, z: 0.3505489}
+  m_Size: {x: 0.4, y: 0.35, z: 0.3505489}
   m_Center: {x: 1.4066832e-28, y: 0.3482779, z: 0}
 --- !u!54 &5613272813753937822
 Rigidbody:

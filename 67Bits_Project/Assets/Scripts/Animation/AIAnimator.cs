@@ -44,8 +44,7 @@ public class AIAnimator : MonoBehaviour
     public void EnableRagdoll()
     {
         //_handleRb.isKinematic = true;
-        _anim.enabled = false;
-        SetRagdoll(true);
+        ToggleRagdoll(true);
     }
 
     [ContextMenu(nameof(DisableRagdoll))]
@@ -55,19 +54,19 @@ public class AIAnimator : MonoBehaviour
         _worldPosition.y = 0;
         transform.position = _worldPosition;
 
-        _anim.enabled = true;
         _handleRb.isKinematic = false;
-        SetRagdoll(false);
+        ToggleRagdoll(false);
     }
 
-    public void SetRagdoll(bool _enable)
+    public void ToggleRagdoll(bool _value)
     {
         int _count = _rigidbodies.Count;
 
         for (int i = 0; i < _count; i++)
         {
-            _rigidbodies[i].isKinematic = !_enable;
-            _colliders[i].enabled = _enable;
+            _rigidbodies[i].isKinematic = !_value;
+            _colliders[i].enabled = _value;
+            _anim.enabled = !_value;
         }
     }
 }

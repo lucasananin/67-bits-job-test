@@ -28,11 +28,11 @@ public class TowerHandler : MonoBehaviour
         _segments.Add(_root);
         AddData(_root);
 
-        for (int i = 0; i < _initialCount; i++)
-        {
-            //AddSegment();
-            AddSegmentRB();
-        }
+        //for (int i = 0; i < _initialCount; i++)
+        //{
+        //    //AddSegment();
+        //    AddSegmentRB();
+        //}
     }
 
     private void LateUpdate()
@@ -74,16 +74,23 @@ public class TowerHandler : MonoBehaviour
         }
     }
 
-    [ContextMenu(nameof(AddSegmentRB))]
-    public void AddSegmentRB()
+    public void AddSegment(Transform _transform)
     {
         if (_segments.Count >= _capacity + 1) return;
-        var _instance = Instantiate(_aiPrefab, Vector3.up * _segments.Count, Quaternion.identity);
-        _instance.GoToTower();
-        var _handle = _instance.HandleRB.transform;
-        _segments.Add(_handle);
-        AddData(_handle);
+        _segments.Add(_transform);
+        AddData(_transform);
     }
+
+    //[ContextMenu(nameof(AddSegmentRB))]
+    //public void AddSegmentRB()
+    //{
+    //    if (_segments.Count >= _capacity + 1) return;
+    //    var _instance = Instantiate(_aiPrefab, Vector3.up * _segments.Count, Quaternion.identity);
+    //    _instance.GoToTower();
+    //    var _handle = _instance.HandleRB.transform;
+    //    _segments.Add(_handle);
+    //    AddData(_handle);
+    //}
 
     //[ContextMenu(nameof(RemoveSegmentRB))]
     //public void RemoveSegmentRB()
@@ -95,16 +102,16 @@ public class TowerHandler : MonoBehaviour
     //    RemoveData();
     //}
 
-    [ContextMenu("AddSegment()")]
-    public void AddSegment()
-    {
-        if (_segments.Count >= _capacity + 1) return;
+    //[ContextMenu("AddSegment()")]
+    //public void AddSegment()
+    //{
+    //    if (_segments.Count >= _capacity + 1) return;
 
-        var _prefab = _prefabs[Random.Range(0, _prefabs.Count)];
-        var _instance = Instantiate(_prefab);
-        _segments.Add(_instance);
-        AddData(_instance);
-    }
+    //    var _prefab = _prefabs[Random.Range(0, _prefabs.Count)];
+    //    var _instance = Instantiate(_prefab);
+    //    _segments.Add(_instance);
+    //    AddData(_instance);
+    //}
 
     [ContextMenu("RemoveSegment()")]
     public void RemoveSegment()
