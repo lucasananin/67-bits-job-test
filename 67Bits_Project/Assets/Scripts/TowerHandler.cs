@@ -143,6 +143,11 @@ public class TowerHandler : MonoBehaviour
         _dataList.RemoveAt(_dataList.Count - 1);
     }
 
+    public bool IsFull()
+    {
+        return _segments.Count - 1 >= _capacity;
+    }
+
     internal string GetDisplayString()
     {
         return $"{_segments.Count - 1}/{_capacity}";

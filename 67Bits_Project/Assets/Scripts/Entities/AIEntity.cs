@@ -10,12 +10,14 @@ public class AIEntity : MonoBehaviour
     [SerializeField] Vector2Int _priceRange = new(3, 6);
 
     private NPCSpawner _spawner = null;
+    private TowerHandler _tower = null;
 
     public Rigidbody HandleRB { get => _handleRB; }
 
-    internal void Init(NPCSpawner _spawner)
+    internal void Init(NPCSpawner _spawner, TowerHandler _towerHandler)
     {
         this._spawner = _spawner;
+        _tower = _towerHandler;
         _collider.enabled = true;
     }
 
@@ -37,14 +39,18 @@ public class AIEntity : MonoBehaviour
 
     public void GoToTower()
     {
-        _handleRB.isKinematic = true;
-
-        // OPTIMIZE
-        var _tower = FindFirstObjectByType<TowerHandler>();
-        _tower.AddSegment(_handleRB.transform);
+        if (_tower.IsFull())
+        {
+            Die();
+        }
+        else
+        {
+            _handleRB.isKinematic = true;
+            _tower.AddSegment(_handleRB.transform);
+        }
     }
 
-    internal void Disappear()
+    internal void Die()
     {
         _spawner.ReturnToPool(this);
         _anim.DisableRagdoll();

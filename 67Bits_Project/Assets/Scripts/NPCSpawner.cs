@@ -5,6 +5,7 @@ using UnityEngine;
 public class NPCSpawner : MonoBehaviour
 {
     [SerializeField] List<Collider> _areas = null;
+    [SerializeField] TowerHandler _towerHandler = null;
     [SerializeField] AIEntity _prefab = null;
     [SerializeField] int _maxCapacity = 5;
 
@@ -58,7 +59,7 @@ public class NPCSpawner : MonoBehaviour
 
             if (!_activeList.Contains(_entity))
             {
-                _entity.Init(this);
+                _entity.Init(this, _towerHandler);
                 return _entity;
             }
         }

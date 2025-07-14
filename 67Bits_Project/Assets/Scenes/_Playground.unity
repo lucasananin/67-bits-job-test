@@ -1543,7 +1543,7 @@ Light:
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_ColorTemperature: 20000
+  m_ColorTemperature: 5000
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
@@ -1822,7 +1822,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _force: 200
-  _radius: 2
+  _radius: 3
   _upwardsMultiplier: 0.5
 --- !u!114 &606080586
 MonoBehaviour:
@@ -5544,6 +5544,7 @@ MonoBehaviour:
   - {fileID: 2104766246}
   - {fileID: 1209998661}
   - {fileID: 1776613510}
+  _towerHandler: {fileID: 606080583}
   _prefab: {fileID: -8297114754004999880, guid: 34a1cccfba980ec43805809e1a410cd1, type: 3}
   _maxCapacity: 5
   _poolList: []

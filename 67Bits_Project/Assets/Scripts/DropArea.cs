@@ -41,7 +41,7 @@ public class DropArea : MonoBehaviour
                 OnComplete(() =>
                 {
                     var _entity = _segment.GetComponentInParent<AIEntity>();
-                    _entity.Disappear();
+                    _entity.Die();
                     OnDelivered?.Invoke(_entity);
                 });
 

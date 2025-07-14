@@ -3,6 +3,7 @@ using UnityEngine.Events;
 
 public class PunchHandler : MonoBehaviour
 {
+    //[SerializeField] PlayerEntity _entity = null;
     [SerializeField] Transform _muzzle = null;
     [SerializeField] SphereCollider _collider = null;
     [SerializeField] LayerMask _layerMask = default;
@@ -16,6 +17,8 @@ public class PunchHandler : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //if (!_entity.CanPunch()) return;
+
         var _hits = Physics.SphereCastNonAlloc(_muzzle.position, _collider.radius, transform.forward, _results, 0, _layerMask);
 
         for (int i = 0; i < _hits; i++)
@@ -24,7 +27,7 @@ public class PunchHandler : MonoBehaviour
 
             if (_colliderHit.TryGetComponent(out AIEntity _entity))
             {
-                _entity.Knockdown(_muzzle.position, _force, _radius, _upwardsMultiplier);
+                _entity.Knockdown(transform.position, _force, _radius, _upwardsMultiplier);
             }
         }
 

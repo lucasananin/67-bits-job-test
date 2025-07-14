@@ -150,7 +150,7 @@ MonoBehaviour:
   _handleRB: {fileID: 402609212989406934}
   _collider: {fileID: 8859405569440573748}
   _anim: {fileID: 4135698173907677415}
-  _knockdownDuration: 2
+  _knockdownDuration: 1
   _priceRange: {x: 3, y: 6}
 --- !u!114 &4135698173907677415
 MonoBehaviour:
