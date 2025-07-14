@@ -40,10 +40,8 @@ public class DropArea : MonoBehaviour
             _segment.DOJump(transform.position, _segment.position.y + _jumpPower, 1, _moveDuration).
                 OnComplete(() =>
                 {
-                    // add money.
                     var _entity = _segment.GetComponentInParent<AIEntity>();
                     _entity.Disappear();
-
                     OnDelivered?.Invoke(_entity);
                 });
 

@@ -16,7 +16,6 @@ public class AIEntity : MonoBehaviour
     internal void Init(NPCSpawner _spawner)
     {
         this._spawner = _spawner;
-        //_anim.DisableRagdoll();
         _collider.enabled = true;
     }
 
@@ -34,8 +33,6 @@ public class AIEntity : MonoBehaviour
         yield return new WaitForSeconds(_knockdownDuration);
 
         GoToTower();
-        //_anim.DisableRagdoll();
-        //_collider.enabled = true;
     }
 
     public void GoToTower()
@@ -49,17 +46,8 @@ public class AIEntity : MonoBehaviour
 
     internal void Disappear()
     {
-        StartCoroutine(Disappear_Routine());
-    }
-
-    private IEnumerator Disappear_Routine()
-    {
-        _spawner.RemoveFromActiveList(this);
+        _spawner.ReturnToPool(this);
         _anim.DisableRagdoll();
-        transform.position = Vector3.one * -123456f;
-        //yield return new WaitForSeconds(.1f);
-        yield return null;
-        //gameObject.SetActive(false);
     }
 
     internal int GetCostValue()

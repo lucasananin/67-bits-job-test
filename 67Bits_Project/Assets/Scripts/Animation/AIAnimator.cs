@@ -9,20 +9,19 @@ public class AIAnimator : MonoBehaviour
     [SerializeField] List<Rigidbody> _rigidbodies = null;
     [SerializeField] List<Collider> _colliders = null;
 
-    private Vector3[] storedPositions;
-    private Quaternion[] storedRotations;
-
     private void Awake()
     {
-        storedPositions = new Vector3[_rigidbodies.Count];
-        storedRotations = new Quaternion[_colliders.Count];
         ToggleRagdoll(false);
     }
 
-    //private void Start()
-    //{
-
-    //}
+    [ContextMenu("Fodase")]
+    public void Fodase()
+    {
+        var _a = _hipBone.GetComponentsInChildren<Rigidbody>();
+        var _b = _hipBone.GetComponentsInChildren<Collider>();
+        _rigidbodies = new List<Rigidbody>(_a);
+        _colliders = new List<Collider>(_b);
+    }
 
     public void Explode(Vector3 _origin, float _force, float _radius, float _upwardsMultiplier)
     {
@@ -37,33 +36,15 @@ public class AIAnimator : MonoBehaviour
     [ContextMenu(nameof(EnableRagdoll))]
     public void EnableRagdoll()
     {
-        //int _count = _rigidbodies.Count;
-        //for (int i = 0; i < _count; i++)
-        //{
-        //    storedPositions[i] = _rigidbodies[i].transform.localPosition;
-        //    storedRotations[i] = _rigidbodies[i].transform.localRotation;
-        //}
-        //_anim.enabled = false;
-
         ToggleRagdoll(true);
     }
 
     [ContextMenu(nameof(DisableRagdoll))]
     public void DisableRagdoll()
     {
-        //var _worldPosition = _handleRb.position;
-        //_worldPosition.y = 0;
-        //transform.position = _worldPosition;
         _handleRb.isKinematic = false;
         AlignPositionToHips();
         ToggleRagdoll(false);
-
-        //int _count = _rigidbodies.Count;
-        //for (int i = 0; i < _count; i++)
-        //{
-        //    _rigidbodies[i].transform.SetLocalPositionAndRotation(storedPositions[i], storedRotations[i]);
-        //}
-        //_anim.enabled = true;
     }
 
     public void ToggleRagdoll(bool _value)

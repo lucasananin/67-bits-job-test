@@ -31,7 +31,6 @@ public class NPCSpawner : MonoBehaviour
             var _position = GetRandomPointInBounds(_area.bounds);
             _position.y = 0;
             var _rotation = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
-            //var _entity = Instantiate(_prefab, _position, _rotation);
             var _entity = GetEntity();
             _entity.transform.SetPositionAndRotation(_position, _rotation);
             _activeList.Add(_entity);
@@ -45,7 +44,6 @@ public class NPCSpawner : MonoBehaviour
         for (int i = 0; i < _count; i++)
         {
             var _instance = Instantiate(_prefab, Vector3.one * -12345f, Quaternion.identity);
-            //_instance.gameObject.SetActive(false);
             _poolList.Add(_instance);
         }
     }
@@ -58,10 +56,8 @@ public class NPCSpawner : MonoBehaviour
         {
             var _entity = _poolList[i];
 
-            //if (!_entity.gameObject.activeSelf)
             if (!_activeList.Contains(_entity))
             {
-                //_entity.gameObject.SetActive(true);
                 _entity.Init(this);
                 return _entity;
             }
@@ -69,12 +65,10 @@ public class NPCSpawner : MonoBehaviour
 
         PopulatePool(1);
         var _newEntity = _poolList[^1];
-        //_newEntity.gameObject.SetActive(true);
-        //_newEntity.Init();
         return _newEntity;
     }
 
-    public void RemoveFromActiveList(AIEntity _entity)
+    public void ReturnToPool(AIEntity _entity)
     {
         _activeList.Remove(_entity);
         _entity.transform.position = Vector3.one * -123456f;
