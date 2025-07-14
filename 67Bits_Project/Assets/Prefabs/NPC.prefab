@@ -150,6 +150,7 @@ MonoBehaviour:
   _collider: {fileID: 8859405569440573748}
   _anim: {fileID: 4135698173907677415}
   _knockdownDuration: 2
+  _priceRange: {x: 3, y: 6}
 --- !u!114 &4135698173907677415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,6 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _anim: {fileID: 8702091305634509750}
+  _hipBone: {fileID: 3223331370220692448}
   _handleRb: {fileID: 1964533872202515311}
   _rigidbodies:
   - {fileID: 1299205379416532847}
@@ -188,7 +190,6 @@ MonoBehaviour:
   - {fileID: 4549545195473726008}
   - {fileID: 7530102020304955420}
   - {fileID: 6341716558312955556}
-  _explosionForce: 50
 --- !u!1001 &5382514969970912026
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -402,7 +403,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!144 &950490466576549310
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -440,7 +441,7 @@ CharacterJoint:
     limit: 0
     bounciness: 0
     contactDistance: 0
-  m_EnableProjection: 0
+  m_EnableProjection: 1
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
@@ -503,7 +504,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!144 &8641532003790376317
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -541,7 +542,7 @@ CharacterJoint:
     limit: 0
     bounciness: 0
     contactDistance: 0
-  m_EnableProjection: 0
+  m_EnableProjection: 1
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
@@ -604,7 +605,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!144 &5633016440928167986
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -642,7 +643,7 @@ CharacterJoint:
     limit: 0
     bounciness: 0
     contactDistance: 0
-  m_EnableProjection: 0
+  m_EnableProjection: 1
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
@@ -705,7 +706,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!144 &2292937633152118309
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -743,7 +744,7 @@ CharacterJoint:
     limit: 0
     bounciness: 0
     contactDistance: 0
-  m_EnableProjection: 0
+  m_EnableProjection: 1
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
@@ -752,6 +753,11 @@ CharacterJoint:
   m_EnablePreprocessing: 0
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!4 &3223331370220692448 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7352436545434290426, guid: 77131d5846f5f454f9557f31cf75da7d, type: 3}
+  m_PrefabInstance: {fileID: 5382514969970912026}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3504089365989522779 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -426840934721661375, guid: 77131d5846f5f454f9557f31cf75da7d, type: 3}
@@ -806,7 +812,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!144 &7511500577398326221
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -844,7 +850,7 @@ CharacterJoint:
     limit: 0
     bounciness: 0
     contactDistance: 0
-  m_EnableProjection: 0
+  m_EnableProjection: 1
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
@@ -907,7 +913,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!144 &1866366795878091550
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -945,7 +951,7 @@ CharacterJoint:
     limit: 0
     bounciness: 0
     contactDistance: 0
-  m_EnableProjection: 0
+  m_EnableProjection: 1
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
@@ -1008,7 +1014,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!144 &6057106749123870985
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -1046,7 +1052,7 @@ CharacterJoint:
     limit: 0
     bounciness: 0
     contactDistance: 0
-  m_EnableProjection: 0
+  m_EnableProjection: 1
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
@@ -1109,7 +1115,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!144 &6321854141429238133
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -1147,7 +1153,7 @@ CharacterJoint:
     limit: 0
     bounciness: 0
     contactDistance: 0
-  m_EnableProjection: 0
+  m_EnableProjection: 1
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
@@ -1235,7 +1241,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!144 &6285836524669327466
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -1273,7 +1279,7 @@ CharacterJoint:
     limit: 0
     bounciness: 0
     contactDistance: 0
-  m_EnableProjection: 0
+  m_EnableProjection: 1
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
@@ -1339,7 +1345,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!144 &3590625252189804024
 CharacterJoint:
   m_ObjectHideFlags: 0
@@ -1377,7 +1383,7 @@ CharacterJoint:
     limit: 0
     bounciness: 0
     contactDistance: 0
-  m_EnableProjection: 0
+  m_EnableProjection: 1
   m_ProjectionDistance: 0.1
   m_ProjectionAngle: 180
   m_BreakForce: Infinity
@@ -1438,4 +1444,4 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
