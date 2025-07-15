@@ -6,8 +6,9 @@ using UnityEngine.Events;
 public class TowerHandler : MonoBehaviour
 {
     [Header("// GENERAL")]
+    [SerializeField] TowerUpgradeSO _so = null;
     [SerializeField] Transform _root = null;
-    [SerializeField] int _capacity = 10;
+    //[SerializeField] int _capacity = 10;
 
     [Header("// MOVEMENT")]
     [SerializeField] float _segmentSpacing = 1f;
@@ -26,6 +27,11 @@ public class TowerHandler : MonoBehaviour
 
     public static event UnityAction<TowerHandler> OnChanged = null;
 
+    private void Awake()
+    {
+        _so.ResetRuntimeValues();
+    }
+
     private void Start()
     {
         _segments.Add(_root);
@@ -37,7 +43,17 @@ public class TowerHandler : MonoBehaviour
         //    AddSegmentRB();
         //}
 
-        OnChanged?.Invoke(this);
+        SendOnChangedEvent();
+    }
+
+    private void OnEnable()
+    {
+        _so.OnChanged += SendOnChangedEvent;
+    }
+
+    private void OnDisable()
+    {
+        _so.OnChanged -= SendOnChangedEvent;
     }
 
     private void LateUpdate()
@@ -81,10 +97,11 @@ public class TowerHandler : MonoBehaviour
 
     public void AddSegment(Transform _transform)
     {
-        if (_segments.Count >= _capacity + 1) return;
+        if (_segments.Count >= _so.GetCurrentCapacity() + 1) return;
+        //if (_segments.Count >= _capacity + 1) return;
         _segments.Add(_transform);
         AddData(_transform);
-        OnChanged?.Invoke(this);
+        SendOnChangedEvent();
     }
 
     //[ContextMenu("AddSegment()")]
@@ -124,7 +141,7 @@ public class TowerHandler : MonoBehaviour
             RemoveData();
         }
 
-        OnChanged?.Invoke(this);
+        SendOnChangedEvent();
         return _list;
     }
 
@@ -145,12 +162,17 @@ public class TowerHandler : MonoBehaviour
 
     public bool IsFull()
     {
-        return _segments.Count - 1 >= _capacity;
+        return _segments.Count - 1 >= _so.GetCurrentCapacity();
     }
 
     internal string GetDisplayString()
     {
-        return $"{_segments.Count - 1}/{_capacity}";
+        return $"{_segments.Count - 1}/{_so.GetCurrentCapacity()}";
+    }
+
+    private void SendOnChangedEvent()
+    {
+        OnChanged?.Invoke(this);
     }
 }
 

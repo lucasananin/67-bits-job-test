@@ -5,6 +5,8 @@ public class PlayerWallet : MonoBehaviour
 {
     [SerializeField] int _currentValue = 0;
 
+    public int CurrentValue { get => _currentValue; }
+
     public static event UnityAction<int> OnChanged = null;
 
     private void Start()
@@ -25,6 +27,12 @@ public class PlayerWallet : MonoBehaviour
     private void IncreaseMoney(AIEntity _entity)
     {
         _currentValue += _entity.GetCostValue();
+        OnChanged?.Invoke(_currentValue);
+    }
+
+    public void DecreaseMoney(int _value)
+    {
+        _currentValue -= _value;
         OnChanged?.Invoke(_currentValue);
     }
 }
