@@ -7,6 +7,7 @@ public class TowerHandler : MonoBehaviour
     [Header("// GENERAL")]
     [SerializeField] TowerUpgradeSO _so = null;
     [SerializeField] Transform _root = null;
+    [SerializeField] Transform _top = null;
     //[SerializeField] int _capacity = 10;
 
     [Header("// MOVEMENT")]
@@ -14,6 +15,7 @@ public class TowerHandler : MonoBehaviour
     [SerializeField] float _followSmoothness = 15f;
     [SerializeField] float _inertia = 15f;
     [SerializeField] float _rotationSmoothness = 1f;
+    [SerializeField] float _topMoveSpeed = 10;
 
     //[Header("// GENERATOR")]
     //[SerializeField] List<Transform> _prefabs = null;
@@ -92,6 +94,9 @@ public class TowerHandler : MonoBehaviour
 
             _segment.SetPositionAndRotation(_data.position, _data.rotation);
         }
+
+        var _step = _topMoveSpeed * Time.deltaTime;
+        _top.position = Vector3.MoveTowards(_top.position, transform.position + Vector3.up * _segments.Count, _step);
     }
 
     public void AddSegment(Transform _transform)

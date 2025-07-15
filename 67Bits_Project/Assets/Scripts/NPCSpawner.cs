@@ -5,9 +5,10 @@ using UnityEngine;
 public class NPCSpawner : MonoBehaviour
 {
     [SerializeField] List<Collider> _areas = null;
+    [SerializeField] TowerUpgradeSO _towerSO = null;
     [SerializeField] TowerHandler _towerHandler = null;
     [SerializeField] AIEntity _prefab = null;
-    [SerializeField] int _maxCapacity = 5;
+    //[SerializeField] int _maxCapacity = 5;
 
     [Header("// READONLY")]
     [SerializeField] List<AIEntity> _poolList = null;
@@ -23,7 +24,7 @@ public class NPCSpawner : MonoBehaviour
     {
         while (true)
         {
-            while (_activeList.Count >= _maxCapacity)
+            while (_activeList.Count >= _towerSO.GetCurrentCapacity())
             {
                 yield return null;
             }
@@ -36,7 +37,8 @@ public class NPCSpawner : MonoBehaviour
             _entity.transform.SetPositionAndRotation(_position, _rotation);
             _activeList.Add(_entity);
 
-            yield return new WaitForSeconds(.1f);
+            var _randomTime = Random.Range(0.1f, 0.2f);
+            yield return new WaitForSeconds(_randomTime);
         }
     }
 
@@ -45,6 +47,7 @@ public class NPCSpawner : MonoBehaviour
         for (int i = 0; i < _count; i++)
         {
             var _instance = Instantiate(_prefab, Vector3.one * -12345f, Quaternion.identity);
+            _instance.Init(this, _towerHandler);
             _poolList.Add(_instance);
         }
     }
