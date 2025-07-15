@@ -4,7 +4,7 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class DropArea : MonoBehaviour
+public class DropArea : OnTriggerEvent
 {
     [SerializeField] float _jumpPower = 2f;
     [SerializeField] float _moveDuration = 1f;
@@ -19,7 +19,7 @@ public class DropArea : MonoBehaviour
         _waitTime = new WaitForSeconds(_grabInterval);
     }
 
-    private void OnTriggerEnter(Collider _other)
+    public override void OnEnterMethod(Collider _other)
     {
         if (_other.TryGetComponent(out TowerHandler _tower))
         {
@@ -28,6 +28,8 @@ public class DropArea : MonoBehaviour
             if (_segments != null)
                 StartCoroutine(MoveSegments_Routine(_segments));
         }
+
+        base.OnEnterMethod(_other);
     }
 
     private IEnumerator MoveSegments_Routine(List<Transform> _segments)
