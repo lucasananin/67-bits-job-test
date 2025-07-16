@@ -154,15 +154,15 @@ public class TowerHandler : MonoBehaviour
         OnChanged?.Invoke(this);
     }
 
-    //[ContextMenu("KillEveryone()")]
-    //public void KillEveryone()
-    //{
-    //    var _a = FindObjectsByType<AIEntity>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
-    //    foreach (var item in _a)
-    //    {
-    //        item.Knockdown(transform.position, 1, 1, 1);
-    //    }
-    //}
+    [ContextMenu("KillEveryone()")]
+    private void Debug_KillEveryone()
+    {
+        var _entities = FindObjectsByType<AIEntity>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+        foreach (var _entity in _entities)
+        {
+            _entity.Knockdown(transform.position, 1, 1, 1);
+        }
+    }
 }
 
 [System.Serializable]
