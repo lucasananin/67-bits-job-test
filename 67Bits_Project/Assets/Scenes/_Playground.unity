@@ -242,7 +242,7 @@ MonoBehaviour:
     Weight: 1
     Radius: 1
   - Object: {fileID: 678550625}
-    Weight: 1
+    Weight: 5
     Radius: 1
   m_LegacyTargets: []
 --- !u!4 &28703384
@@ -1929,9 +1929,10 @@ MonoBehaviour:
   _top: {fileID: 678550625}
   _segmentSpacing: 1
   _followSmoothness: 15
-  _inertia: 15
+  _inertia: 20
   _rotationSmoothness: 1
   _topMoveSpeed: 10
+  _clampFactor: 1
   _segments: []
   _dataList: []
 --- !u!114 &606080584

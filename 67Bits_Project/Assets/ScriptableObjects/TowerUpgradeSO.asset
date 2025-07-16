@@ -23,6 +23,6 @@ MonoBehaviour:
     nextLevelCost: 51
   - capacity: 24
     nextLevelCost: 64
-  - capacity: 26
+  - capacity: 31
     nextLevelCost: 0
   _currentLevel: 0

@@ -15,6 +15,7 @@ public class TowerHandler : MonoBehaviour
     [SerializeField] float _inertia = 15f;
     [SerializeField] float _rotationSmoothness = 1f;
     [SerializeField] float _topMoveSpeed = 10;
+    [SerializeField] float _clampFactor = 1.1f;
 
     [Header("// READONLY")]
     [SerializeField] List<Transform> _segments = null;
@@ -77,6 +78,15 @@ public class TowerHandler : MonoBehaviour
                 {
                     Quaternion targetRot = Quaternion.LookRotation(_direction);
                     _data.rotation = Quaternion.Slerp(_data.rotation, targetRot, Time.deltaTime * _rotationSmoothness);
+                }
+
+                Vector3 _delta = _data.position - _previousData.position;
+                float _distance = _delta.magnitude;
+                float _maxDistance = _segmentSpacing * _clampFactor;
+
+                if (_distance > _maxDistance)
+                {
+                    _data.position = _previousData.position + _delta.normalized * _maxDistance;
                 }
             }
 
@@ -143,6 +153,16 @@ public class TowerHandler : MonoBehaviour
     {
         OnChanged?.Invoke(this);
     }
+
+    //[ContextMenu("KillEveryone()")]
+    //public void KillEveryone()
+    //{
+    //    var _a = FindObjectsByType<AIEntity>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
+    //    foreach (var item in _a)
+    //    {
+    //        item.Knockdown(transform.position, 1, 1, 1);
+    //    }
+    //}
 }
 
 [System.Serializable]
