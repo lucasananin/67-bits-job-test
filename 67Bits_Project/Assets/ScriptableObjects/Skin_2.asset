@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 502e3b877ff953646ae00d33d6d75e3e, type: 3}
   m_Name: Skin_2
   m_EditorClassIdentifier: 
-  _texture: {fileID: 2800000, guid: eb97fdb50f0e2d541b0296b706d6a0c4, type: 3}
+  _texture: {fileID: 2800000, guid: 95a2240c086dda440a2042a437367d0f, type: 3}
   _price: 12
   _wasPurchased: 0

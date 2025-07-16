@@ -30,7 +30,7 @@ public class SkinSlotUI : MonoBehaviour
         }
         else
         {
-            _info.text = $"{_so.name} - R${_so.Price}";
+            _info.text = $"{_so.name} ---------- R${_so.Price}";
         }
 
         _equippedText.enabled = _shopUI.IsEquipped(_so);

@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 502e3b877ff953646ae00d33d6d75e3e, type: 3}
-  m_Name: Skin_1
+  m_Name: Skin_4
   m_EditorClassIdentifier: 
-  _texture: {fileID: 2800000, guid: a1baac50b04383644879742cccce0fd5, type: 3}
-  _price: 0
-  _wasPurchased: 1
+  _texture: {fileID: 2800000, guid: 53033e02b06d91e43a6a8221985f011a, type: 3}
+  _price: 38
+  _wasPurchased: 0

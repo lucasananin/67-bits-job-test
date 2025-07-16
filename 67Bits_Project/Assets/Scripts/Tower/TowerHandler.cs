@@ -8,7 +8,6 @@ public class TowerHandler : MonoBehaviour
     [SerializeField] TowerUpgradeSO _so = null;
     [SerializeField] Transform _root = null;
     [SerializeField] Transform _top = null;
-    //[SerializeField] int _capacity = 10;
 
     [Header("// MOVEMENT")]
     [SerializeField] float _segmentSpacing = 1f;
@@ -16,11 +15,6 @@ public class TowerHandler : MonoBehaviour
     [SerializeField] float _inertia = 15f;
     [SerializeField] float _rotationSmoothness = 1f;
     [SerializeField] float _topMoveSpeed = 10;
-
-    //[Header("// GENERATOR")]
-    //[SerializeField] List<Transform> _prefabs = null;
-    //[SerializeField] AIEntity _aiPrefab = null;
-    //[SerializeField] int _initialCount = 10;
 
     [Header("// READONLY")]
     [SerializeField] List<Transform> _segments = null;
@@ -35,15 +29,9 @@ public class TowerHandler : MonoBehaviour
 
     private void Start()
     {
+        Application.targetFrameRate = 30;
         _segments.Add(_root);
         AddData(_root);
-
-        //for (int i = 0; i < _initialCount; i++)
-        //{
-        //    //AddSegment();
-        //    AddSegmentRB();
-        //}
-
         SendOnChangedEvent();
     }
 
@@ -102,33 +90,10 @@ public class TowerHandler : MonoBehaviour
     public void AddSegment(Transform _transform)
     {
         if (_segments.Count >= _so.GetCurrentCapacity() + 1) return;
-        //if (_segments.Count >= _capacity + 1) return;
         _segments.Add(_transform);
         AddData(_transform);
         SendOnChangedEvent();
     }
-
-    //[ContextMenu("AddSegment()")]
-    //public void AddSegment()
-    //{
-    //    if (_segments.Count >= _capacity + 1) return;
-
-    //    var _prefab = _prefabs[Random.Range(0, _prefabs.Count)];
-    //    var _instance = Instantiate(_prefab);
-    //    _segments.Add(_instance);
-    //    AddData(_instance);
-    //}
-
-    //[ContextMenu("RemoveSegment()")]
-    //public void RemoveSegment()
-    //{
-    //    if (_segments.Count <= 1) return;
-
-    //    var _instance = _segments[^1];
-    //    _segments.Remove(_instance);
-    //    //Destroy(_instance.gameObject);
-    //    RemoveData();
-    //}
 
     public List<Transform> PopSegments()
     {

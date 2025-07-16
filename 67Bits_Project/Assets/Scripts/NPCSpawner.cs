@@ -8,7 +8,6 @@ public class NPCSpawner : MonoBehaviour
     [SerializeField] TowerUpgradeSO _towerSO = null;
     [SerializeField] TowerHandler _towerHandler = null;
     [SerializeField] AIEntity _prefab = null;
-    //[SerializeField] int _maxCapacity = 5;
 
     [Header("// READONLY")]
     [SerializeField] List<AIEntity> _poolList = null;

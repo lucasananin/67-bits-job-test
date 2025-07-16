@@ -38,6 +38,7 @@ public class SkinShopUI : MonoBehaviour
         _wallet.DecreaseMoney(_skinSo.Price);
         _skinSo.WasPurchased = true;
         UpdateVisuals();
+        EquipSkin(_skinSo);
     }
 
     public void EquipSkin(SkinSO _skinSo)

@@ -5,7 +5,6 @@ public class PlayerMover : AbstractMover
     [SerializeField] PlayerInput _input = null;
     [SerializeField] CharacterController _cc = null;
     [SerializeField] float _speed = 2.0f;
-    //[SerializeField] float _jumpHeight = 1.0f;
     [SerializeField] float _gravityValue = -9.81f;
 
     [Header("// READONLY")]
@@ -14,6 +13,11 @@ public class PlayerMover : AbstractMover
     [SerializeField] bool _canMove = true;
 
     public bool CanMove { get => _canMove; set => _canMove = value; }
+
+    private void Start()
+    {
+        transform.position += Vector3.up * _cc.skinWidth;
+    }
 
     private void Update()
     {
@@ -27,11 +31,6 @@ public class PlayerMover : AbstractMover
         }
 
         Vector3 _move = new(_input.Move.x, 0, _input.Move.y);
-
-        //if (_input.Jump && _isGrounded)
-        //{
-        //    _playerVelocity.y = Mathf.Sqrt(_jumpHeight * -2.0f * _gravityValue);
-        //}
 
         _playerVelocity.y += _gravityValue * Time.deltaTime;
 
