@@ -29,7 +29,7 @@ public class TowerHandler : MonoBehaviour
 
     private void Start()
     {
-        Application.targetFrameRate = 30;
+        //Application.targetFrameRate = 30;
         _segments.Add(_root);
         AddData(_root);
         SendOnChangedEvent();
